@@ -3,6 +3,8 @@ def githubStatusCheck(String state, String description){
     githubNotify account: 'inspectorguidget',sha: "${commitHash}", status: state, description: description, credentialsId: 'github-token', repo: 'maven-inspectorguidget-plugin'
 }
 
+githubStatusCheck("PENDING", "Currently building the project");
+
 pipeline {
     agent any
 
