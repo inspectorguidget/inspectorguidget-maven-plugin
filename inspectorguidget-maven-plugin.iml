@@ -6,6 +6,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/resources" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/plugin" isTestSource="false" generated="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -44,12 +45,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.apache.maven.plugin-tools:maven-plugin-annotations:3.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.apache.maven.plugin-testing:maven-plugin-testing-harness:3.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.maven.plugin-testing:maven-plugin-testing-harness:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.plexus:plexus-archiver:2.2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: classworlds:classworlds:1.1-alpha-2" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.codehaus.plexus:plexus-io:2.0.4" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-archiver:2.2" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1" level="project" />
+    <orderEntry type="library" name="Maven: classworlds:classworlds:1.1-alpha-2" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.plexus:plexus-io:2.0.4" level="project" />
     <orderEntry type="library" name="Maven: fr.inria.inspectorguidget:inspectorguidget-java:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: fr.inria.gforge.spoon:spoon-core:7.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jdt:org.eclipse.jdt.core:3.15.0" level="project" />
@@ -96,5 +97,11 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-fxml:linux:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:11.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:linux:11.0.2" level="project" />
+    <orderEntry type="library" name="Maven: fr.inria.inspectorguidget:inspectorguidget-java-api:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: fr.inria.inspectorguidget:inspectorguidget-data:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib:1.3.40" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-stdlib-common:1.3.40" level="project" />
+    <orderEntry type="library" name="Maven: com.beust:klaxon:5.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.jetbrains.kotlin:kotlin-reflect:1.2.60" level="project" />
   </component>
 </module>
