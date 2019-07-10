@@ -22,10 +22,6 @@ import java.util.List;
 @Mojo( name = "extractdata",requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME )
 public class MyMojo extends AbstractMojo {
 
-    //file(s) or directory(ies) to analyse
-    @Parameter( defaultValue = "${project}")
-    private File projectDirectory;
-
     //maven project to analyse
     @Parameter( defaultValue = "${project}")
     private MavenProject mavenProject;
@@ -44,7 +40,7 @@ public class MyMojo extends AbstractMojo {
         UIDataAnalyser analyser = new UIDataAnalyser();
         PrintWriter pw = null;
 
-        analyser.addInputResource(projectDirectory.getAbsolutePath());
+        analyser.addInputResource(mavenProject.getFile().getAbsolutePath());
 
         List<Dependency> listDependencies = mavenProject.getDependencies();
         String[] dependencies = new String[listDependencies.size()];
