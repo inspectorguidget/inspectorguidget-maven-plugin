@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Set;
 
 @Mojo( name = "extractdata",requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME )
 public class MyMojo extends AbstractMojo {
@@ -45,12 +46,14 @@ public class MyMojo extends AbstractMojo {
         analyser.addInputResource(mavenProject.getBasedir().getAbsolutePath());
 
         System.out.println("adding dependencies path...");
-        List<Artifact> listDependencies = mavenProject.getAttachedArtifacts();
-        String[] dependencies = new String[listDependencies.size()];
-        for(int i=0; i<listDependencies.size(); i++){
-            dependencies[i] = listDependencies.get(i).getFile().getAbsolutePath();
-            System.out.println(listDependencies.get(i).getFile().getAbsolutePath());
+        Set<Artifact> setDependency = mavenProject.getArtifacts();
+
+        int i=0;
+        String[] dependencies = new String[setDependency.size()];
+        for(Artifact artifact : setDependency){
+            dependencies[i++] = artifact.getFile().getAbsolutePath();
         }
+
         analyser.setSourceClasspath(dependencies);
 
         System.out.println("Extracting data...");
@@ -67,6 +70,5 @@ public class MyMojo extends AbstractMojo {
                 pw.close();
             }
         }
-
     }
 }
