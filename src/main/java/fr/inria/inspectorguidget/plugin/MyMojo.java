@@ -23,11 +23,11 @@ import java.util.List;
 public class MyMojo extends AbstractMojo {
 
     //maven project to analyse
-    @Parameter( defaultValue = "${project}")
+    @Parameter( defaultValue = "${project}", required = true, readonly = true)
     private MavenProject mavenProject;
 
     // file containing data
-    @Parameter(defaultValue = "data.json")
+    @Parameter(defaultValue = "data.json", required =true)
     private String dataFileName;
 
     // type of the analyser
@@ -40,8 +40,10 @@ public class MyMojo extends AbstractMojo {
         UIDataAnalyser analyser = new UIDataAnalyser();
         PrintWriter pw = null;
 
+        System.out.println("adding Input Ressources...");
         analyser.addInputResource(mavenProject.getFile().getAbsolutePath());
 
+        System.out.println("adding dependencies path...");
         List<Dependency> listDependencies = mavenProject.getDependencies();
         String[] dependencies = new String[listDependencies.size()];
         for(int i=0; i<listDependencies.size(); i++){
@@ -49,6 +51,7 @@ public class MyMojo extends AbstractMojo {
         }
         analyser.setSourceClasspath(dependencies);
 
+        System.out.println("Extracting data...");
         UIData data = analyser.extractUIData();
         try {
              new PrintWriter(dataFileName);
