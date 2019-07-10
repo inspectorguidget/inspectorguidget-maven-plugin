@@ -54,6 +54,8 @@ public class MyMojo extends AbstractMojo {
 
         System.out.println("Extracting data...");
         UIData data = analyser.extractUIData();
+
+        System.out.println("building data file...");
         try {
              new PrintWriter(dataFileName);
             pw.print(new Klaxon().toJsonString(data,null));
