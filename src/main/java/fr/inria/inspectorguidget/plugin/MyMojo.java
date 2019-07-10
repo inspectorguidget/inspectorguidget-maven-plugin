@@ -28,7 +28,7 @@ public class MyMojo extends AbstractMojo {
     private MavenProject mavenProject;
 
     // file containing data
-    @Parameter(defaultValue = "data.json", required =true)
+    @Parameter(defaultValue = "data.json", required =true, readonly = true)
     private String dataFileName;
 
     // type of the analyser
@@ -57,7 +57,7 @@ public class MyMojo extends AbstractMojo {
 
         System.out.println("building data file...");
         try {
-             new PrintWriter(dataFileName);
+            pw = new PrintWriter(dataFileName);
             pw.print(new Klaxon().toJsonString(data,null));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
