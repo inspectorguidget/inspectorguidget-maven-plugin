@@ -4,6 +4,7 @@ import com.beust.klaxon.Klaxon;
 import fr.inria.inspectorguidget.api.analyser.UIDataAnalyser;
 
 import fr.inria.inspectorguidget.data.UIData;
+import org.apache.maven.artifact.Artifact;
 import org.apache.maven.model.Dependency;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -44,10 +45,10 @@ public class MyMojo extends AbstractMojo {
         analyser.addInputResource(mavenProject.getFile().getAbsolutePath());
 
         System.out.println("adding dependencies path...");
-        List<Dependency> listDependencies = mavenProject.getDependencies();
+        List<Artifact> listDependencies = mavenProject.getAttachedArtifacts();
         String[] dependencies = new String[listDependencies.size()];
         for(int i=0; i<listDependencies.size(); i++){
-            dependencies[i] = listDependencies.get(i).getSystemPath();
+            dependencies[i] = listDependencies.get(i).getFile().getAbsolutePath();
         }
         analyser.setSourceClasspath(dependencies);
 
