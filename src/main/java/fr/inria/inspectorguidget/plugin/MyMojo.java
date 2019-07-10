@@ -23,15 +23,15 @@ import java.util.List;
 public class MyMojo extends AbstractMojo {
 
     //file(s) or directory(ies) to analyse
-    @Parameter( defaultValue = "${project}", required = true, readonly = true)
+    @Parameter( defaultValue = "${project}")
     private File projectDirectory;
 
     //maven project to analyse
-    @Parameter( defaultValue = "${project}", required = true, readonly = true)
+    @Parameter( defaultValue = "${project}")
     private MavenProject mavenProject;
 
     // file containing data
-    @Parameter(defaultValue = "data.json", required = true)
+    @Parameter(defaultValue = "data.json")
     private String dataFileName;
 
     // type of the analyser
