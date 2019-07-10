@@ -42,13 +42,14 @@ public class MyMojo extends AbstractMojo {
         PrintWriter pw = null;
 
         System.out.println("adding Input Ressources...");
-        analyser.addInputResource(mavenProject.getFile().getAbsolutePath());
+        analyser.addInputResource(mavenProject.getBasedir().getAbsolutePath());
 
         System.out.println("adding dependencies path...");
         List<Artifact> listDependencies = mavenProject.getAttachedArtifacts();
         String[] dependencies = new String[listDependencies.size()];
         for(int i=0; i<listDependencies.size(); i++){
             dependencies[i] = listDependencies.get(i).getFile().getAbsolutePath();
+            System.out.println(listDependencies.get(i).getFile().getAbsolutePath());
         }
         analyser.setSourceClasspath(dependencies);
 
