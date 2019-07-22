@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @Mojo( name = "extractdata",requiresDependencyCollection = ResolutionScope.COMPILE_PLUS_RUNTIME, requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME )
-public class MyMojo extends AbstractMojo {
+public class InspectorMojo extends AbstractMojo {
 
     //maven project to analyse
     @Parameter( defaultValue = "${project}", required = true, readonly = true)
@@ -42,10 +42,10 @@ public class MyMojo extends AbstractMojo {
         UIDataAnalyser analyser = new UIDataAnalyser();
         PrintWriter pw = null;
 
-        System.out.println("adding Input Ressources...");
+        getLog().info("adding Input Ressources...");
         analyser.addInputResource(mavenProject.getBasedir().getAbsolutePath());
 
-        System.out.println("adding dependencies path...");
+        getLog().info("adding dependencies path...");
         Set<Artifact> setDependency = mavenProject.getArtifacts();
 
         int i=0;
@@ -56,15 +56,15 @@ public class MyMojo extends AbstractMojo {
 
         analyser.setSourceClasspath(dependencies);
 
-        System.out.println("Extracting data...");
+        getLog().info("Extracting data...");
         UIData data = analyser.extractUIData();
 
-        System.out.println("building data file...");
+        getLog().info("building data file...");
         try {
             pw = new PrintWriter(dataFileName);
             pw.print(new Klaxon().toJsonString(data,null));
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            getLog().error(e.fillInStackTrace());
         } finally {
             if(pw != null) {
                 pw.close();
