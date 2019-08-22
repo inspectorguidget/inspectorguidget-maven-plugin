@@ -20,7 +20,7 @@ To be able to use this plugin you must add the following plugin repositories in 
 </pluginRepositories>
 ```
 
-Then add the plugin :
+Then add the task :
 
 ```
 <plugin>
@@ -33,17 +33,35 @@ Then add the plugin :
 </plugin>
 ```
 
-## Parameters
+## Extract Data
+
+### Parameters
 
 When using the plugin, you're able to precise some parameters. These parameters must appear in the configuration tag whan adding plugin. You can edit the following parameters :
 - __mavenProject__ : the maven project you want to analyse (optionnal, by default : the project where you're using the plugin)
 - __dataFileName__ : the name of the file containing the extracted data (optionnal, by default : data.json)
 - __analyserType__ : the type of analyse you want to run (REQUIRED, choose among : java)
 
-## Running the plugin
+### Running the plugin
 
 To run the analysis, just enter the following command:
 ```
 mvn inspectorguidget:extractdata
 ```
 the data file is created at the root of the project. You can then visualise the extracted data using inspectorguidget-viz.
+
+## Instrument (WIP)
+
+### Parameters
+
+When using the plugin, you're able to precise some parameters. These parameters must appear in the configuration tag whan adding plugin. You can edit the following parameters :
+- __project__ : the maven project you want to analyse (optionnal, by default : the project where you're using the plugin)
+- __instrumentationFileName__ : name of the file with the logs (optionnal, by default : instrumentation.log)
+
+### Running the task
+
+To run the instrumentation, just enter the following command:
+```
+mvn inspectorguidget:instrument
+```
+the log file is created at the root of the project.
