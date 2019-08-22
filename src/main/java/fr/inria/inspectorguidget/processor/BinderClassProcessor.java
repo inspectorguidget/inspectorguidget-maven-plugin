@@ -3,8 +3,6 @@ package fr.inria.inspectorguidget.processor;
 import spoon.processing.AbstractProcessor;
 import spoon.reflect.code.CtInvocation;
 import spoon.reflect.declaration.CtClass;
-import spoon.reflect.declaration.CtElement;
-import spoon.reflect.declaration.CtMethod;
 import spoon.reflect.visitor.filter.AbstractFilter;
 
 import java.util.ArrayList;

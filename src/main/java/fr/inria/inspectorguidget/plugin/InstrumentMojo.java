@@ -42,7 +42,7 @@ public class InstrumentMojo extends AbstractMojo {
     /**
      * Maven project.
      */
-    @Parameter(property = "project", readonly = true)
+    @Parameter(defaultValue = "${project}", property = "project", readonly = true)
     private MavenProject project;
 
     @Parameter(property = "instrumentationFileName", defaultValue = "instrumentation.log")
