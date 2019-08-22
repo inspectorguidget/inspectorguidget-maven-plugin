@@ -62,6 +62,8 @@ public class InstrumentMojo extends AbstractMojo {
             LOGGER.severe("can't log in file");
         }
 
+        LOGGER.info("[Plugin] Searching for classes with binders");
+
         final File originalClassesDir = new File(project.getBuild().getDirectory(), "generated-classes/Instrumentation");
         originalClassesDir.mkdirs();
         final File classesDir = new File(project.getBuild().getOutputDirectory());
@@ -82,8 +84,11 @@ public class InstrumentMojo extends AbstractMojo {
 
         final List<String> fileNames = binderClassProcessor.getClassNames();
 
+        if(fileNames.size()==0)
+            LOGGER.info("no class to process");
+
         for (String fileName : fileNames) {
-            LOGGER.info("Processing" + fileName);
+            LOGGER.info("[Plugin] Processing" + fileName);
         }
 
     }
