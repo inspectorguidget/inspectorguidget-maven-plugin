@@ -10,6 +10,9 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 import spoon.Launcher;
 import spoon.SpoonAPI;
+import spoon.reflect.code.CtInvocation;
+import spoon.reflect.declaration.CtClass;
+import spoon.reflect.visitor.filter.AbstractFilter;
 
 import java.io.*;
 import java.util.List;
@@ -54,14 +57,37 @@ public class InstrumentMojo extends AbstractMojo {
         spoon.getEnvironment().setComplianceLevel(9); // to avoid spoonException
         spoon.run();
 
-        final List<String> classNames = binderClassProcessor.getClassNames();
+        final List<CtClass> classList = binderClassProcessor.getClassNames();
 
-        if(classNames.size()==0)
+        if(classList.size()==0)
             LOGGER.info("[Plugin] no class to process");
 
-        for (String className : classNames) {
-            LOGGER.info("[Plugin] Processing : " + className);
+        for (CtClass clazz : classList) {
+            LOGGER.info("[Plugin] Processing : " + clazz.getSimpleName());
+            // here copy classes to transform
+            //transformClass(clazz);
         }
 
+    }
+
+    public void transformClass(CtClass clazz){
+
+        List<CtInvocation> binders = clazz.getElements(new AbstractFilter<CtInvocation>() {
+            @Override
+            public boolean matches(CtInvocation invoc) {
+                if(invoc.toString().endsWith("bind()"))
+                    return true;
+                else
+                    return false;
+            }
+        });
+
+        for(CtInvocation binder : binders){
+            transformInvoc(binder);
+        }
+    }
+
+    public void transformInvoc(CtInvocation invoc){
+        //Here add : .log(LogLevel.BINDING) before .bind()
     }
 }

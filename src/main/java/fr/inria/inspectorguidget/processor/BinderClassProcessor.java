@@ -10,7 +10,7 @@ import java.util.List;
 
 public class BinderClassProcessor extends AbstractProcessor<CtClass> {
 
-    private List<String> classNames = new ArrayList<>();
+    private List<CtClass> classList = new ArrayList<>();
 
     @Override
     public boolean isToBeProcessed(CtClass candidate){
@@ -34,10 +34,10 @@ public class BinderClassProcessor extends AbstractProcessor<CtClass> {
 
     @Override
     public void process(CtClass clazz) {
-        classNames.add(clazz.getQualifiedName());
+        classList.add(clazz);
     }
 
-    public List<String> getClassNames(){
-        return classNames;
+    public List<CtClass> getClassNames(){
+        return classList;
     }
 }
