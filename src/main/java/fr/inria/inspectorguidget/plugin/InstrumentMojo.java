@@ -75,7 +75,7 @@ public class InstrumentMojo extends AbstractMojo {
 
         //TODO : get all the filenames in the directory thanks to spoon processor
         SpoonAPI spoon = new Launcher();
-        spoon.addInputResource(project.getBuild().getDirectory());
+        spoon.addInputResource(project.getFile().getAbsolutePath());
 
         BinderClassProcessor binderClassProcessor = new BinderClassProcessor();
 
