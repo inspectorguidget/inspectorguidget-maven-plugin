@@ -1,6 +1,5 @@
 package fr.inria.inspectorguidget.plugin;
 
-import android.os.Binder;
 import fr.inria.inspectorguidget.processor.BinderClassProcessor;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -12,10 +11,7 @@ import org.apache.maven.project.MavenProject;
 import spoon.Launcher;
 import spoon.SpoonAPI;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.util.ArrayList;
+import java.io.*;
 import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -24,20 +20,6 @@ import java.util.logging.SimpleFormatter;
 
 @Mojo(name = "instrument", defaultPhase = LifecyclePhase.PROCESS_CLASSES, threadSafe = true)
 public class InstrumentMojo extends AbstractMojo {
-
-    /**
-     * A list of class files to include in instrumentation. May use wildcard
-     * characters (* and ?). When not specified everything will be included.
-     */
-    @Parameter
-    private List<String> includes;
-
-    /**
-     * A list of class files to exclude from instrumentation. May use wildcard
-     * characters (* and ?). When not specified nothing will be excluded.
-     */
-    @Parameter
-    private List<String> excludes;
 
     /**
      * Maven project.
@@ -62,33 +44,23 @@ public class InstrumentMojo extends AbstractMojo {
             LOGGER.severe("can't log in file");
         }
 
-        LOGGER.info("[Plugin] Searching for classes with binders");
-
-        final File originalClassesDir = new File(project.getBuild().getDirectory(), "generated-classes/Instrumentation");
-        originalClassesDir.mkdirs();
-        final File classesDir = new File(project.getBuild().getOutputDirectory());
-
-        if (!classesDir.exists()) {
-            LOGGER.info("Skipping execution due to missing classes directory");
-            return;
-        }
-
-        //TODO : get all the filenames in the directory thanks to spoon processor
         SpoonAPI spoon = new Launcher();
-        spoon.addInputResource(project.getFile().getAbsolutePath());
+        spoon.addInputResource(project.getBasedir().getAbsolutePath() + "/src/main/java/net/sf/latexdraw");
 
         BinderClassProcessor binderClassProcessor = new BinderClassProcessor();
 
         spoon.addProcessor(binderClassProcessor);
+
+        spoon.getEnvironment().setComplianceLevel(9); // to avoid spoonException
         spoon.run();
 
-        final List<String> fileNames = binderClassProcessor.getClassNames();
+        final List<String> classNames = binderClassProcessor.getClassNames();
 
-        if(fileNames.size()==0)
-            LOGGER.info("no class to process");
+        if(classNames.size()==0)
+            LOGGER.info("[Plugin] no class to process");
 
-        for (String fileName : fileNames) {
-            LOGGER.info("[Plugin] Processing" + fileName);
+        for (String className : classNames) {
+            LOGGER.info("[Plugin] Processing : " + className);
         }
 
     }

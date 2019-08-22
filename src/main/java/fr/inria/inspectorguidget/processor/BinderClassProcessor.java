@@ -15,8 +15,6 @@ public class BinderClassProcessor extends AbstractProcessor<CtClass> {
     @Override
     public boolean isToBeProcessed(CtClass candidate){
 
-        // System.out.println(candidate.getSimpleName());
-
         try{
             CtInvocation invoc = candidate.getElements(new AbstractFilter<CtInvocation>() {
                 @Override
@@ -36,7 +34,7 @@ public class BinderClassProcessor extends AbstractProcessor<CtClass> {
 
     @Override
     public void process(CtClass clazz) {
-        classNames.add(clazz.getSimpleName());
+        classNames.add(clazz.getQualifiedName());
     }
 
     public List<String> getClassNames(){
